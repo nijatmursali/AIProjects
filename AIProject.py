@@ -238,6 +238,7 @@ graph.EdgeElaveEt(nodeShamkir, nodeGanja, 40)
 graph.EdgeElaveEt(nodeGanja, nodeTartar, 84)
 graph.EdgeElaveEt(nodeGanja, nodeYevlax, 69)
 graph.EdgeElaveEt(nodeYevlax, nodeAgdash, 21)
+graph.EdgeElaveEt(nodeYevlax, nodeBarda, 35)
 graph.EdgeElaveEt(nodeTartar, nodeBarda, 21)
 graph.EdgeElaveEt(nodeBarda, nodeAghdam, 51)
 graph.EdgeElaveEt(nodeAgdash, nodeQabala, 76)
@@ -625,14 +626,21 @@ def printfunction():
         umumi_cost = graph.Astarfunksiyasi(nodeBalakan, nodeBaku) # executes the algorithm
     elif Inputforfirstregion=="Agstafa" and Inputforlastregion == "Baku":
         umumi_cost = graph.Astarfunksiyasi(nodeAgstafa, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Qabala" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeQabala, nodeBaku) # executes the algorithm
     elif Inputforfirstregion=="Qazax" and Inputforlastregion == "Baku":
         umumi_cost = graph.Astarfunksiyasi(nodeQazax, nodeBaku) # executes the algorithm
     elif Inputforfirstregion=="Tovuz" and Inputforlastregion == "Baku":
         umumi_cost = graph.Astarfunksiyasi(nodeTovuz, nodeBaku) # executes the algorithm
     elif Inputforfirstregion=="Shamkir" and Inputforlastregion == "Baku":
         umumi_cost = graph.Astarfunksiyasi(nodeShamkir, nodeBaku) # executes the algorithm
-    elif Inputforfirstregion=="Tovuz" and Inputforlastregion == "Baku":
-        umumi_cost = graph.Astarfunksiyasi(nodeTovuz, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Ganja" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeGanja, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Yevlax" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(Yevlax, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Aghdash" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeAgdash, nodeBaku) # executes the algorithm
+
     path = graph.yoluTap() # gets path
     result = ('Graph-ın ümumi costu: %s kilometrdir. Yol: %s ' % (umumi_cost, ' -> '.join(path)))
 
@@ -674,7 +682,7 @@ w.create_window(800,120, window = ButtonforfindingAstar)
 
 
 
-printfunction()
+#printfunction()
 
 
 master.mainloop()
