@@ -605,10 +605,10 @@ w.create_text(1000,320, anchor=W, font=("Purisa",10), text="Bakı = 0", fill = "
 
 res = []
 def printfunction():
-
+    global res
     for r in res:
         r.destroy()
-
+    res=[]
     try:
         Inputforfirstregion = Entryforfirstregion.get()
         Inputforlastregion = Entryforlastregion.get()
@@ -641,6 +641,11 @@ def printfunction():
     elif Inputforfirstregion=="Aghdash" and Inputforlastregion == "Baku":
         umumi_cost = graph.Astarfunksiyasi(nodeAgdash, nodeBaku) # executes the algorithm
 
+    #Statements for Astar functions
+    #if Inputforfirstregion == "" and Inputforlastregion == """
+        #umumi_cost = graph.Astarfunksiyasi(node, node)
+
+    path=''
     path = graph.yoluTap() # gets path
     result = ('Graph-ın ümumi costu: %s kilometrdir. Yol: %s ' % (umumi_cost, ' -> '.join(path)))
 
@@ -659,11 +664,11 @@ def printfunction():
 
 
 
-widget1 = Label(w, text='Enter the first region:', fg='white', bg='black')
+widget1 = Label(w, text='İlk şəhəri əlavə edin!', fg='white', bg='black')
 widget1.pack()
-
 w.create_window(500, 100, window=widget1)
-widget2 = Label(w, text='Enter the last region:', fg='white', bg='black')
+
+widget2 = Label(w, text='Sonuncu şəhəri əlavə edin!', fg='white', bg='black')
 widget2.pack()
 w.create_window(500,140, window = widget2)
 
@@ -676,7 +681,7 @@ Entryforlastregion.pack()
 w.create_window(650,140, window = Entryforlastregion)
 
 
-ButtonforfindingAstar = Button(w, text = "Search about it!", command = printfunction)
+ButtonforfindingAstar = Button(w, text = "Axtarışa ver!", command = printfunction)
 ButtonforfindingAstar.pack()
 w.create_window(800,120, window = ButtonforfindingAstar)
 
