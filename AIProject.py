@@ -8,7 +8,7 @@ import tkinter
 scaledversion = 1.5;
 
 #Stackdaki elemetleri gosteren class
-class Stackadielementler:
+class QueueElementleri:
 
     def __init__(self):
         self.arraydakiler = []
@@ -96,7 +96,7 @@ class Graph:
                 if bashlangic_noqte == son_noqte: # Eger eynidirse
                     return 0
 
-                queue = Stackadielementler() # queue duzeldir
+                queue = QueueElementleri() # queue duzeldir
 
                 # "mesafe_vectoru" ve "pathquran" yolu yeniden qurmaq uchun ishlenir
                 mesafe_vectoru, pathquran = {}, {}
@@ -322,28 +322,33 @@ printfunction()
 master = Tk()
 
 w = Canvas(master, width=1200, height=1080,bd=0,highlightthickness=0)
-
+w.pack(expand = YES, fill = BOTH)
 w.configure(bg="black")
 master.minsize(width = 1200, height = 1080)
 master.maxsize(width = 1920, height = 1080)
-w.pack()
+#w.pack()
+
 
 w.create_line(scaledversion * 20,scaledversion*200,scaledversion* 40,scaledversion* 150, fill = "white", width = 2) #nodeAgstafa
 w.create_text(scaledversion*35, scaledversion*145, anchor=W, font=("Purisa",10), text="Agstafa", fill = "white")
 w.create_text(scaledversion*25, scaledversion*195, anchor=W, font=("Purisa",10), text="Qazax", fill = "white")
+w.create_text(scaledversion*32, scaledversion*175, anchor = W, font=("Purisa",10), text="50", fill = "white")
 w.create_oval(30,300,35,295, outline="white", fill="white", width=2)
 
 w.create_line(scaledversion*40,scaledversion*150, scaledversion*80, scaledversion*200, fill = "white", width = 2) #Tovuz
 w.create_text(scaledversion*75, scaledversion*185, anchor=W, font=("Purisa",10), text="Tovuz", fill = "white")
+w.create_text(scaledversion*65, scaledversion*177, anchor = W, font=("Purisa",10), text="45", fill = "white")
 w.create_oval(60,225,65,230, outline="white", fill="white", width=2)
 w.create_oval(120,300,125,305, outline="white", fill="white", width=2)
 
 w.create_line(scaledversion*80,scaledversion*200, scaledversion*130, scaledversion*190, fill = "white", width = 2) #Shamkir
 w.create_text(scaledversion*130, scaledversion*185, anchor=W, font=("Purisa",10), text="Shamkir", fill = "white")
+w.create_text(scaledversion*115, scaledversion*185, anchor = W, font=("Purisa",10), text="37", fill = "white")
 w.create_oval(scaledversion*130, scaledversion*190,scaledversion*135, scaledversion*196, outline="white", fill="white", width=2)
 
 w.create_line(scaledversion*130,scaledversion*190, scaledversion*160, scaledversion*210, fill = "white", width = 2) #ganja
 w.create_text(scaledversion*160, scaledversion*205, anchor=W, font=("Purisa",10), text="Ganja", fill = "white")
+w.create_text(scaledversion*140, scaledversion*205, anchor = W, font=("Purisa",10), text="40", fill = "white")
 w.create_oval(scaledversion*160, scaledversion*210,scaledversion*164, scaledversion*215, outline="white", fill="white", width=2)
 
 w.create_line(scaledversion*160,scaledversion*210, scaledversion*110 , scaledversion*300, fill = "white", width = 2) #Kalbacar
@@ -460,7 +465,8 @@ w.create_text(scaledversion*360, scaledversion*225, anchor=W, font=("Purisa",10)
 
 w.create_line(scaledversion*320, scaledversion*270, scaledversion*380, scaledversion*260, fill = "white", width = 2) #qobustan- xirdalan
 w.create_text(scaledversion*380, scaledversion*255, anchor=W, font=("Purisa",10), text="Xirdalan", fill = "white")
-
+w.create_line(scaledversion*320, scaledversion*270, scaledversion*260, scaledversion*280, fill = "white", width = 2)
+w.create_line(scaledversion*290, scaledversion*240, scaledversion*260, scaledversion*280, fill = "white", width = 2)
 w.create_line(scaledversion*270, scaledversion*200, scaledversion*240, scaledversion*220, fill = "white", width = 2) #ismayill-goycay
 w.create_text(scaledversion*240, scaledversion*215, anchor=W, font=("Purisa",10), text="Goycay", fill = "white")
 
@@ -596,19 +602,79 @@ w.create_text(1000,300, anchor=W, font=("Purisa",10), text="Sumqayıt = 39", fil
 w.create_text(1000,320, anchor=W, font=("Purisa",10), text="Bakı = 0", fill = "white")
 
 
-
+res = []
 def printfunction():
 
-    umumi_cost = graph.Astarfunksiyasi(nodeBalakan, nodeBaku) # executes the algorithm
+    for r in res:
+        r.destroy()
+
+    try:
+        Inputforfirstregion = Entryforfirstregion.get()
+        Inputforlastregion = Entryforlastregion.get()
+    except:
+
+        LabelError = Label(w, text = 'Enter both regions!')
+        LabelError.pack()
+        w.create_window(650, 170, window = LabelError)
+
+
+
+    umumi_cost = graph.Astarfunksiyasi(Inputforfirstregion, Inputforlastregion) # executes the algorithm
+
+    if Inputforfirstregion=="Balakan" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeBalakan, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Agstafa" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeAgstafa, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Qazax" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeQazax, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Tovuz" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeTovuz, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Shamkir" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeShamkir, nodeBaku) # executes the algorithm
+    elif Inputforfirstregion=="Tovuz" and Inputforlastregion == "Baku":
+        umumi_cost = graph.Astarfunksiyasi(nodeTovuz, nodeBaku) # executes the algorithm
     path = graph.yoluTap() # gets path
     result = ('Graph-ın ümumi costu: %s kilometrdir. Yol: %s ' % (umumi_cost, ' -> '.join(path)))
 
+    #res.append(LabelforResult)
     if umumi_cost:
-        print(result)
+        LabelforResult = Label(w, text = result)
+        LabelforResult.pack()
+        w.create_window(650, 70, window = LabelforResult)
+        res.append(LabelforResult)
+        #print(result)
     else:
-
+        LabelNotResult = Label(w, text = "Nəticə tapılmadı!")
+        LabelNotResult.pack()
+        w.create_window(650,70, window = LabelNotResult)
         print('Nəticə tapılmadı!')
 
+
+
+widget1 = Label(w, text='Enter the first region:', fg='white', bg='black')
+widget1.pack()
+
+w.create_window(500, 100, window=widget1)
+widget2 = Label(w, text='Enter the last region:', fg='white', bg='black')
+widget2.pack()
+w.create_window(500,140, window = widget2)
+
+Entryforfirstregion = Entry(w)
+Entryforfirstregion.pack()
+w.create_window(650,100, window = Entryforfirstregion)
+
+Entryforlastregion = Entry(w)
+Entryforlastregion.pack()
+w.create_window(650,140, window = Entryforlastregion)
+
+
+ButtonforfindingAstar = Button(w, text = "Search about it!", command = printfunction)
+ButtonforfindingAstar.pack()
+w.create_window(800,120, window = ButtonforfindingAstar)
+
+
+
 printfunction()
+
 
 master.mainloop()
